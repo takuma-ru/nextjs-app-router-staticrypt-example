@@ -75,13 +75,16 @@ const staticryptScript = `<script>
     </script>`;
 
 /**
- * login.htmlからmetaタグ内の要素を取り出す
+ * login.htmlからmetaタグ内の要素を取り出す（titleなど重複要素は消す）
  * @returns metaタグ内の要素
  */
 const cutOutMeta = () => {
   const indexHeadStart = login.indexOf("<head");
   const indexHeadEnd = login.indexOf("</head");
-  return login.substring(indexHeadStart + 7, indexHeadEnd);
+  let meta = login.substring(indexHeadStart + 6, indexHeadEnd);
+  /* meta.replace("<title>Create Next App</title>", "");
+  meta.replace(/<meta name="viewport".*\/>/, ""); */
+  return meta;
 };
 
 /**
@@ -95,10 +98,21 @@ const cutOutBody = () => {
   return login.substring(indexBodyStartEnd + 1, indexBodyEnd);
 };
 
+/**
+ * body に付与されているclassNameを取り出す
+ * @returns body に付与されているclassName
+ */
 const cutOutBodyClassName = () => {
   const indexBodyClassStart = login.indexOf('<body class="');
   const indexBodyClassEnd = login.indexOf('">', indexBodyClassStart);
   return login.substring(indexBodyClassStart + 13, indexBodyClassEnd);
+};
+
+const cutOutScripts = () => {
+  const indexHtmlEnd = login.indexOf("</html");
+  const indexScriptStart = login.indexOf("<script", indexHtmlEnd);
+  const indexScriptEnd = login.lastIndexOf("</script");
+  return login.substring(indexScriptStart, indexScriptEnd);
 };
 
 /**
@@ -108,6 +122,7 @@ const generate = () => {
   const meta = cutOutMeta();
   const body = cutOutBody();
   const bodyClassName = cutOutBodyClassName();
+  const scripts = cutOutScripts();
 
   const html = `
   <!DOCTYPE html>
@@ -124,11 +139,12 @@ const generate = () => {
     </body>
 
   </html>
+  ${scripts}
   `;
 
   try {
     /* fs.writeFileSync("out/login.html", text); */
-    fs.writeFileSync("out-test/login.html", html);
+    fs.writeFileSync("out/login.html", html);
     console.log("write end");
   } catch (e) {
     console.log(e);
