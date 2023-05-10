@@ -4,6 +4,9 @@
 
 **For Next.js App Router**
 
+> Pages Dir is [here](https://github.com/takuma-ru/nextjs-staticrypt-example-app)
+> But, I probably won't be updating it.
+
 Web application example with authentication without backend using [Next.js SSG](https://nextjs.org/docs/basic-features/pages#static-generation) and [staticrypt](https://github.com/robinmoisson/staticrypt).
 
 ## Dependencies / DevDependencies
