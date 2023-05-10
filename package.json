@@ -5,8 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:encrypt": "npx staticrypt out/index.html -p passwordpasswordpassword -d out -c out/.staticrypt.json",
+    "build:login": "ts-node ./.scripts/generateLogin.ts",
+    "build:all": "yarn build && yarn encrypt && yarn generate:login",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "cd out/ && npx http-server"
   },
   "dependencies": {
     "@types/node": "20.1.1",
@@ -18,5 +22,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "sass": "^1.62.1",
+    "ts-node": "^10.9.1"
+  },
+  "volta": {
+    "node": "18.16.0",
+    "yarn": "3.5.0"
   }
 }
