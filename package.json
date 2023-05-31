@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:encrypt": "npx staticrypt out/index.html -p passwordpasswordpassword -d out -c out/.staticrypt.json -t out/login.html",
+    "build:encrypt": "npx staticrypt out/about.html -p passwordpasswordpassword -d out -c out/.staticrypt.json -t out/login.html",
     "build:login": "ts-node ./.scripts/generateLogin.ts",
     "build:all": "yarn build && yarn build:login && yarn build:encrypt",
     "start": "next start",
